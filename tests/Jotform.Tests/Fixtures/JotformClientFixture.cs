@@ -9,6 +9,8 @@ public static class JotformClientFixture
 
     public static JotformClient JotformClient => new(ApiKey);
 
+    public static readonly string FormId;
+    public static readonly string QuestionId;
     static JotformClientFixture()
     {
         var configuration = new ConfigurationBuilder()
@@ -17,5 +19,7 @@ public static class JotformClientFixture
 
         ApiKey = configuration["ApiKey"] ?? throw new InvalidOperationException();
         UserName = configuration["UserName"] ?? throw new InvalidOperationException();
+        FormId = configuration["FormId"] ?? throw new InvalidOperationException();
+        QuestionId = configuration["QuestionId"] ?? throw new InvalidOperationException();
     }
 }

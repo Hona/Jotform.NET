@@ -214,4 +214,162 @@ public class SimpleIntegrationTests
         forms.Response.Should().NotBeNull();
         forms.Response.Should().NotBeEmpty();
     }
+
+    [Fact]
+    public async Task GetForm_WithFormId_ReturnsSingleForm()
+    {
+        // Arrange
+        var jotformClient = JotformClientFixture.JotformClient;
+        
+        // Act
+        var form = await jotformClient.GetFormAsync(JotformClientFixture.FormId);
+        
+        // Assert
+        form.Should().NotBeNull();
+        form!.ResponseCode.Should().Be(HttpStatusCode.OK);
+        form.Response.Should().NotBeNull();
+        form.Response.Id.Should().Be(JotformClientFixture.FormId);
+    }
+
+    [Fact]
+    public async Task GetFormQuestions_WithFormId_ReturnsListOfQuestions()
+    {
+        // Arrange
+        var jotformClient = JotformClientFixture.JotformClient;
+        
+        // Act
+        var questions = await jotformClient.GetFormQuestionsAsync(JotformClientFixture.FormId);
+        
+        // Assert
+        questions.Should().NotBeNull();
+        questions!.ResponseCode.Should().Be(HttpStatusCode.OK);
+        questions.Response.Should().NotBeNull();
+        questions.Response.Should().NotBeEmpty();
+        questions.Response.Should().AllSatisfy(x => x.Value.Qid.Should().NotBeNullOrWhiteSpace());
+    }
+
+    [Fact]
+    public async Task GetFormQuestion_WithFormId_WithQuestionId_ReturnsAQuestion()
+    {
+        // Arrange
+        var jotformClient = JotformClientFixture.JotformClient;
+        
+        // Act
+        var question = await jotformClient.GetFormQuestionAsync(JotformClientFixture.FormId, JotformClientFixture.QuestionId);
+        
+        // Assert
+        question.Should().NotBeNull();
+        question!.ResponseCode.Should().Be(HttpStatusCode.OK);
+        question.Response.Should().NotBeNull();
+        question.Response.Qid.Should().Be(JotformClientFixture.QuestionId);
+    }
+
+    [Fact]
+    public async Task GetFormProperties_WithFormId_ReturnsProperties()
+    {
+        // Arrange
+        var jotformClient = JotformClientFixture.JotformClient;
+        
+        // Act
+        var properties = await jotformClient.GetFormPropertiesAsync(JotformClientFixture.FormId);
+        
+        // Assert
+        properties.Should().NotBeNull();
+        properties!.ResponseCode.Should().Be(HttpStatusCode.OK);
+        properties.Response.Should().NotBeNull();
+    }
+
+    [Fact]
+    public async Task GetFormProperty_WithIntMemberExpression_ReturnsProperty()
+    {
+        // Arrange
+        var jotformClient = JotformClientFixture.JotformClient;
+        
+        // Act
+        var property = await jotformClient.GetFormPropertyAsync(JotformClientFixture.FormId, 
+            x => x.FormWidth);
+        
+        // Assert
+        property.Should().NotBeNull();
+        property!.ResponseCode.Should().Be(HttpStatusCode.OK);
+        property.Response.Should().NotBeNull();
+        property.Response.FormWidth.Should().NotBe(default);
+    }
+    
+    [Fact]
+    public async Task GetFormProperty_WithStringMemberExpression_ReturnsProperty()
+    {
+        // Arrange
+        var jotformClient = JotformClientFixture.JotformClient;
+        
+        // Act
+        var property = await jotformClient.GetFormPropertyAsync(JotformClientFixture.FormId, 
+            x => x.Background);
+        
+        // Assert
+        property.Should().NotBeNull();
+        property!.ResponseCode.Should().Be(HttpStatusCode.OK);
+        property.Response.Should().NotBeNull();
+        property.Response.Background.Should().NotBeNullOrWhiteSpace();
+    }
+
+    [Fact]
+    public async Task GetFormReports_WithFormId_ReturnsList()
+    {
+        // Arrange
+        var jotformClient = JotformClientFixture.JotformClient;
+        
+        // Act
+        var report = await jotformClient.GetFormReportsAsync(JotformClientFixture.FormId);
+        
+        // Assert
+        report.Should().NotBeNull();
+        report!.ResponseCode.Should().Be(HttpStatusCode.OK);
+        report.Response.Should().NotBeNull();
+    }
+
+    [Fact]
+    public async Task GetFormFiles_WithFormId_ReturnsList()
+    {
+        // Arrange
+        var jotformClient = JotformClientFixture.JotformClient;
+        
+        // Act
+        var files = await jotformClient.GetFormFilesAsync(JotformClientFixture.FormId);
+        
+        // Assert
+        files.Should().NotBeNull();
+        files!.ResponseCode.Should().Be(HttpStatusCode.OK);
+        files.Response.Should().NotBeNull();
+    }
+
+    [Fact]
+    public async Task GetFormWebhooks_WithFormId_ReturnsList()
+    {
+        // Arrange
+        var jotformClient = JotformClientFixture.JotformClient;
+        
+        // Act
+        var webhooks = await jotformClient.GetFormWebhooksAsync(JotformClientFixture.FormId);
+        
+        // Assert
+        webhooks.Should().NotBeNull();
+        webhooks!.ResponseCode.Should().Be(HttpStatusCode.OK);
+        webhooks.Response.Should().NotBeNull();
+    }
+    
+    [Fact]
+    public async Task GetFormSubmissions_WithFormId_ReturnsList()
+    {
+        // Arrange
+        var jotformClient = JotformClientFixture.JotformClient;
+        
+        // Act
+        var submissions = await jotformClient.GetFormSubmissionsAsync(JotformClientFixture.FormId);
+        
+        // Assert
+        submissions.Should().NotBeNull();
+        submissions!.ResponseCode.Should().Be(HttpStatusCode.OK);
+        submissions.Response.Should().NotBeNull();
+    }
 }

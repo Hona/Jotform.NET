@@ -7,10 +7,7 @@ public partial class JotformClient
 {
     public async Task<JotformResult<Models.Shared.Form>?> PutUserFormsAsync(object formDefinition, CancellationToken cancellationToken = default)
     {
-        var formData = JsonSerializer.Serialize(formDefinition, _jsonSerializerOptions);
-        
-        var response = await _httpClient.PutAsync("user/forms", 
-            new StringContent(formData, Encoding.UTF8, "application/json"), 
+        var response = await _httpClient.PutAsJsonAsync("user/forms", formDefinition, _jsonSerializerOptions, 
             cancellationToken: cancellationToken);
 
         response.EnsureSuccessStatusCode();

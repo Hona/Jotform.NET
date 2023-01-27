@@ -39,6 +39,11 @@ public class UriBuilder
     {
         var query = string.Join("&", _parameters.Select(x => $"{x.Key}={x.Value}"));
 
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            return _baseUrl;
+        }
+        
         return $"{_baseUrl}?{query}";
     }
 }
