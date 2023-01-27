@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{498CC4F1-DD20-400F-8CF9-D936CE0F569B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jotform", "Jotform\Jotform.csproj", "{AAEA41F7-CD6A-4367-9FB4-5B526C69B196}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jotform.Tests", "tests\Jotform.Tests\Jotform.Tests.csproj", "{FFF6B113-F8A3-4F24-9972-0A1D11B8ED73}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FAA57F07-66BE-4FDB-A642-FDB0E38DBC09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AAEA41F7-CD6A-4367-9FB4-5B526C69B196} = {498CC4F1-DD20-400F-8CF9-D936CE0F569B}
+		{FFF6B113-F8A3-4F24-9972-0A1D11B8ED73} = {FAA57F07-66BE-4FDB-A642-FDB0E38DBC09}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AAEA41F7-CD6A-4367-9FB4-5B526C69B196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAEA41F7-CD6A-4367-9FB4-5B526C69B196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAEA41F7-CD6A-4367-9FB4-5B526C69B196}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAEA41F7-CD6A-4367-9FB4-5B526C69B196}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFF6B113-F8A3-4F24-9972-0A1D11B8ED73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFF6B113-F8A3-4F24-9972-0A1D11B8ED73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFF6B113-F8A3-4F24-9972-0A1D11B8ED73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFF6B113-F8A3-4F24-9972-0A1D11B8ED73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
