@@ -404,4 +404,27 @@ public class SimpleIntegrationTests
         folder.Response.Should().NotBeNull();
         folder.Response.Id.Should().Be(JotformClientFixture.FolderId);
     }
+    
+    // Member data to get all enum values of SystemPlanType
+    public static IEnumerable<object[]> SystemPlanTypeValues() =>
+        Enum.GetValues(typeof(SystemPlanType))
+            .Cast<SystemPlanType>()
+            .Select(x => new object[] {x});
+
+    [Theory]
+    [MemberData(nameof(SystemPlanTypeValues))]
+    public async Task GetSystemPlan_WithType_ReturnsData(SystemPlanType type)
+    {
+        // Arrange
+        var jotformClient = JotformClientFixture.JotformClient;
+        
+        // Act
+        var plan = await jotformClient.GetSystemPlanAsync(type);
+        
+        // Assert
+        plan.Should().NotBeNull();
+        plan!.ResponseCode.Should().Be(HttpStatusCode.OK);
+        plan.Response.Should().NotBeNull();
+        
+    }
 }
