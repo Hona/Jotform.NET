@@ -388,4 +388,20 @@ public class SimpleIntegrationTests
         submission.Response.Should().NotBeNull();
         submission.Response.Id.Should().Be(JotformClientFixture.SubmissionId);
     }
+
+    [Fact]
+    public async Task GetFolder_WithFolderId_ReturnsFolder()
+    {
+        // Arrange
+        var jotformClient = JotformClientFixture.JotformClient;
+        
+        // Act
+        var folder = await jotformClient.GetFolderAsync(JotformClientFixture.FolderId);
+        
+        // Assert
+        folder.Should().NotBeNull();
+        folder!.ResponseCode.Should().Be(HttpStatusCode.OK);
+        folder.Response.Should().NotBeNull();
+        folder.Response.Id.Should().Be(JotformClientFixture.FolderId);
+    }
 }
