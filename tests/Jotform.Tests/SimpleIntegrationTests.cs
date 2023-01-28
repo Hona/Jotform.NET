@@ -372,4 +372,20 @@ public class SimpleIntegrationTests
         submissions!.ResponseCode.Should().Be(HttpStatusCode.OK);
         submissions.Response.Should().NotBeNull();
     }
+
+    [Fact]
+    public async Task GetSubmission_WithSubmissionId_ReturnsSubmission()
+    {
+        // Arrange
+        var jotformClient = JotformClientFixture.JotformClient;
+        
+        // Act
+        var submission = await jotformClient.GetSubmissionAsync(JotformClientFixture.SubmissionId);
+        
+        // Assert
+        submission.Should().NotBeNull();
+        submission!.ResponseCode.Should().Be(HttpStatusCode.OK);
+        submission.Response.Should().NotBeNull();
+        submission.Response.Id.Should().Be(JotformClientFixture.SubmissionId);
+    }
 }

@@ -11,6 +11,7 @@ public static class JotformClientFixture
 
     public static readonly string FormId;
     public static readonly string QuestionId;
+    public static readonly string SubmissionId;
     static JotformClientFixture()
     {
         var configuration = new ConfigurationBuilder()
@@ -21,5 +22,6 @@ public static class JotformClientFixture
         UserName = configuration["UserName"] ?? throw new InvalidOperationException();
         FormId = configuration["FormId"] ?? throw new InvalidOperationException();
         QuestionId = configuration["QuestionId"] ?? throw new InvalidOperationException();
+        SubmissionId = configuration["SubmissionId"] ?? throw new InvalidOperationException();
     }
 }
