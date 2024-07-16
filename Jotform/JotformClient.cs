@@ -5,7 +5,6 @@ namespace Jotform;
 
 public partial class JotformClient
 {
-    private readonly string _apiKey;
     private readonly HttpClient _httpClient;
     
     private readonly JsonSerializerOptions _jsonSerializerOptions = new()
@@ -17,27 +16,42 @@ public partial class JotformClient
         },
         NumberHandling = JsonNumberHandling.AllowReadingFromString
     };
-    
+
     /// <summary>
     /// Create a new Jotform Client
     /// </summary>
+    /// <param name="httpClient">The client is used to send the requests.</param>
     /// <param name="apiKey">Obtain an api key at https://www.jotform.com/myaccount/api</param>
     /// <param name="enterpriseSubdomain">For enterprise users, use 'SUBDOMAIN', from the string: 'SUBDOMAIN.jotform.com/API'</param>
-    public JotformClient(string apiKey, string? enterpriseSubdomain = null)
+    public JotformClient(HttpClient httpClient, string apiKey, string? enterpriseSubdomain = null)
     {
-        _apiKey = apiKey;
-        
+
+        if (httpClient.BaseAddress is not null)
+            throw new InvalidOperationException($"Cannot create the JotformClient instance, the base address of the httpclient is already set to {httpClient.BaseAddress} .");
+
         var baseUrl = enterpriseSubdomain != null
             ? $"https://{enterpriseSubdomain}.jotform.com/api"
             : "https://api.jotform.com";
-        
-        _httpClient = new HttpClient
-        {
-            BaseAddress = new Uri(baseUrl),
-            DefaultRequestHeaders =
-            {
-                { "APIKEY", _apiKey}
-            }
-        };
+
+        httpClient.BaseAddress = new Uri(baseUrl);
+        httpClient.DefaultRequestHeaders.Add("APIKEY", apiKey);
+
+        _httpClient = httpClient;
     }
+
+    public Task<JotformResult<TResult>?> GetResultAsync<TResult>(
+        string url, CancellationToken cancellation = default)
+    {
+        return _httpClient.GetFromJsonAsync<JotformResult<TResult>>(
+            url, _jsonSerializerOptions, cancellation);
+    }
+
+    public Task<PagedJotformResult<TResult>?>
+        GetPagedResultAsync<TResult>(string url,
+        CancellationToken cancellation = default)
+    {
+        return _httpClient.GetFromJsonAsync<PagedJotformResult<
+            TResult>>(url, _jsonSerializerOptions, cancellation);
+    }
+
 }
