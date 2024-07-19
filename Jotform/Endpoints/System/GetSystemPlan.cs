@@ -2,9 +2,9 @@
 
 public partial class JotformClient
 {
-    public async Task<JotformResult<SystemPlan>?> GetSystemPlanAsync(SystemPlanType plan, CancellationToken cancellationToken = default) 
-        => await _httpClient.GetFromJsonAsync<JotformResult<SystemPlan>>($"system/plan/{plan.ToString().ToUpper()}", 
-            _jsonSerializerOptions, cancellationToken: cancellationToken);
+    public Task<JotformResult<SystemPlan>?> GetSystemPlanAsync(SystemPlanType plan, CancellationToken cancellationToken = default)
+        => GetResultAsync<SystemPlan>($"system/plan/{plan.ToString()
+            .ToUpper()}", cancellationToken);
 }
 
 public enum SystemPlanType

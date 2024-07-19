@@ -2,8 +2,9 @@
 
 public partial class JotformClient
 {
-    public async Task<JotformResult<GetUserFoldersResponse>?> GetUserFoldersAsync(CancellationToken cancellationToken = default)
-        => await _httpClient.GetFromJsonAsync<JotformResult<GetUserFoldersResponse>>("user/folders", _jsonSerializerOptions, cancellationToken: cancellationToken);
+    public Task<JotformResult<GetUserFoldersResponse>?> GetUserFoldersAsync(CancellationToken cancellationToken = default)
+        => GetResultAsync<GetUserFoldersResponse>("user/folders",
+            cancellationToken);
 }
 
     public class Form
