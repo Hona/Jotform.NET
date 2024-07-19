@@ -1,9 +1,9 @@
-using System.Net;
-using Jotform.Models.Shared;
 using Jotform.Tests.Fixtures;
+using System.Net;
 
 namespace Jotform.Tests;
 
+[Collection(nameof(HttpClientFixture))]
 public class SimpleIntegrationTests
 {
     [Fact]
@@ -92,10 +92,10 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var folders = await jotformClient.GetUserFoldersAsync();
-        
+
         // Assert
         folders.Should().NotBeNull();
         folders!.Response.Forms.Should().HaveCountGreaterThan(0);
@@ -106,10 +106,10 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var reports = await jotformClient.GetUserReportsAsync();
-        
+
         // Assert
         reports.Should().NotBeNull();
         reports!.Response.Should().HaveCount(0);
@@ -120,36 +120,36 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         Func<Task> act = async () => await jotformClient.PostUserRegisterAsync("", "", "");
-        
+
         // Assert
         await act.Should().ThrowAsync<NotSupportedException>();
     }
-    
+
     [Fact]
     public async Task PostUserLogin_WithAny_ShouldThrowException()
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         Func<Task> act = async () => await jotformClient.PostUserLoginAsync("", "");
-        
+
         // Assert
         await act.Should().ThrowAsync<NotSupportedException>();
     }
-    
+
     [Fact]
     public async Task GetUserLogout_WithAny_ShouldThrowException()
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         Func<Task> act = async () => await jotformClient.GetUserLogoutAsync();
-        
+
         // Assert
         await act.Should().ThrowAsync<NotSupportedException>();
     }
@@ -159,39 +159,39 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var settings = await jotformClient.GetUserSettingsAsync();
-        
+
         // Assert
         settings.Should().NotBeNull();
         settings!.ResponseCode.Should().Be(HttpStatusCode.OK);
         settings.Response.Should().NotBeNull();
     }
-    
+
     [Fact]
     public async Task PostUserSettings_WithReadOnly_ShouldThrowException()
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var result = await jotformClient.PostUserSettingsAsync(JotformClientFixture.UserName);
-        
+
         // Assert
         result.Should().NotBeNull();
         result!.Response.Name.Should().Be(JotformClientFixture.UserName);
     }
-    
+
     [Fact]
     public async Task GetUserHistory_WithDefaults_ReturnsObject()
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var history = await jotformClient.GetUserHistoryAsync();
-        
+
         // Assert
         history.Should().NotBeNull();
         history!.ResponseCode.Should().Be(HttpStatusCode.OK);
@@ -204,10 +204,10 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var forms = await jotformClient.GetUserFormsAsync();
-        
+
         // Assert
         forms.Should().NotBeNull();
         forms!.ResponseCode.Should().Be(HttpStatusCode.OK);
@@ -220,10 +220,10 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var form = await jotformClient.GetFormAsync(JotformClientFixture.FormId);
-        
+
         // Assert
         form.Should().NotBeNull();
         form!.ResponseCode.Should().Be(HttpStatusCode.OK);
@@ -236,10 +236,10 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var questions = await jotformClient.GetFormQuestionsAsync(JotformClientFixture.FormId);
-        
+
         // Assert
         questions.Should().NotBeNull();
         questions!.ResponseCode.Should().Be(HttpStatusCode.OK);
@@ -253,10 +253,10 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var question = await jotformClient.GetFormQuestionAsync(JotformClientFixture.FormId, JotformClientFixture.QuestionId);
-        
+
         // Assert
         question.Should().NotBeNull();
         question!.ResponseCode.Should().Be(HttpStatusCode.OK);
@@ -269,10 +269,10 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var properties = await jotformClient.GetFormPropertiesAsync(JotformClientFixture.FormId);
-        
+
         // Assert
         properties.Should().NotBeNull();
         properties!.ResponseCode.Should().Be(HttpStatusCode.OK);
@@ -284,28 +284,28 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
-        var property = await jotformClient.GetFormPropertyAsync(JotformClientFixture.FormId, 
+        var property = await jotformClient.GetFormPropertyAsync(JotformClientFixture.FormId,
             x => x.FormWidth);
-        
+
         // Assert
         property.Should().NotBeNull();
         property!.ResponseCode.Should().Be(HttpStatusCode.OK);
         property.Response.Should().NotBeNull();
         property.Response.FormWidth.Should().NotBe(default);
     }
-    
+
     [Fact]
     public async Task GetFormProperty_WithStringMemberExpression_ReturnsProperty()
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
-        var property = await jotformClient.GetFormPropertyAsync(JotformClientFixture.FormId, 
+        var property = await jotformClient.GetFormPropertyAsync(JotformClientFixture.FormId,
             x => x.Background);
-        
+
         // Assert
         property.Should().NotBeNull();
         property!.ResponseCode.Should().Be(HttpStatusCode.OK);
@@ -318,10 +318,10 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var report = await jotformClient.GetFormReportsAsync(JotformClientFixture.FormId);
-        
+
         // Assert
         report.Should().NotBeNull();
         report!.ResponseCode.Should().Be(HttpStatusCode.OK);
@@ -333,10 +333,10 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var files = await jotformClient.GetFormFilesAsync(JotformClientFixture.FormId);
-        
+
         // Assert
         files.Should().NotBeNull();
         files!.ResponseCode.Should().Be(HttpStatusCode.OK);
@@ -348,25 +348,25 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var webhooks = await jotformClient.GetFormWebhooksAsync(JotformClientFixture.FormId);
-        
+
         // Assert
         webhooks.Should().NotBeNull();
         webhooks!.ResponseCode.Should().Be(HttpStatusCode.OK);
         webhooks.Response.Should().NotBeNull();
     }
-    
+
     [Fact]
     public async Task GetFormSubmissions_WithFormId_ReturnsList()
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var submissions = await jotformClient.GetFormSubmissionsAsync(JotformClientFixture.FormId);
-        
+
         // Assert
         submissions.Should().NotBeNull();
         submissions!.ResponseCode.Should().Be(HttpStatusCode.OK);
@@ -378,10 +378,10 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var submission = await jotformClient.GetSubmissionAsync(JotformClientFixture.SubmissionId);
-        
+
         // Assert
         submission.Should().NotBeNull();
         submission!.ResponseCode.Should().Be(HttpStatusCode.OK);
@@ -394,22 +394,22 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var folder = await jotformClient.GetFolderAsync(JotformClientFixture.FolderId);
-        
+
         // Assert
         folder.Should().NotBeNull();
         folder!.ResponseCode.Should().Be(HttpStatusCode.OK);
         folder.Response.Should().NotBeNull();
         folder.Response.Id.Should().Be(JotformClientFixture.FolderId);
     }
-    
+
     // Member data to get all enum values of SystemPlanType
     public static IEnumerable<object[]> SystemPlanTypeValues() =>
         Enum.GetValues(typeof(SystemPlanType))
             .Cast<SystemPlanType>()
-            .Select(x => new object[] {x});
+            .Select(x => new object[] { x });
 
     [Theory]
     [MemberData(nameof(SystemPlanTypeValues))]
@@ -417,14 +417,14 @@ public class SimpleIntegrationTests
     {
         // Arrange
         var jotformClient = JotformClientFixture.JotformClient;
-        
+
         // Act
         var plan = await jotformClient.GetSystemPlanAsync(type);
-        
+
         // Assert
         plan.Should().NotBeNull();
         plan!.ResponseCode.Should().Be(HttpStatusCode.OK);
         plan.Response.Should().NotBeNull();
-        
+
     }
 }

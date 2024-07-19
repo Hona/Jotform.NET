@@ -7,9 +7,9 @@ public partial class JotformClient
     /// Get User Information
     /// Get user account details for this Jotform user. Including user account type, avatar URL, name, email, website URL.
     /// </summary>
-    public async Task<JotformResult<GetUserResponse>?> GetUserAsync(CancellationToken cancellationToken = default)
-        => await _httpClient.GetFromJsonAsync<JotformResult<GetUserResponse>>("user", 
-            _jsonSerializerOptions, cancellationToken: cancellationToken);
+    public Task<JotformResult<GetUserResponse>?> GetUserAsync(
+        CancellationToken cancellationToken = default)
+        => GetResultAsync<GetUserResponse>("user", cancellationToken);
 }
 
 public class GetUserResponse

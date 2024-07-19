@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Jotform.Models.Shared;
+﻿namespace Jotform.Models.Shared;
 
 public class UriBuilder
 {
@@ -12,38 +10,21 @@ public class UriBuilder
         _baseUrl = baseUrl;
     }
 
-    public UriBuilder AddQuery(string parameter, object? value)
+    public UriBuilder AddQuery<TValue>(string parameter, TValue? value)
     {
-        if (value?.ToString() is null)
-        {
-            return this;
-        }
-
-        _parameters[parameter] = value.ToString()!;
-
-        return this;
-    }
-    public UriBuilder AddQuery(string parameter, string? value)
-    {
-        if (value is null)
-        {
-            return this;
-        }
-
-        _parameters[parameter] = value;
-
+        if (value is null) return this;
+        var stringValue = value.ToString();
+        if (stringValue == string.Empty) return this;
+        _parameters[parameter] = stringValue!;
         return this;
     }
 
     public override string ToString()
     {
+        if (_parameters.Count == 0) return _baseUrl;
+
         var query = string.Join("&", _parameters.Select(x => $"{x.Key}={x.Value}"));
 
-        if (string.IsNullOrWhiteSpace(query))
-        {
-            return _baseUrl;
-        }
-        
         return $"{_baseUrl}?{query}";
     }
 }

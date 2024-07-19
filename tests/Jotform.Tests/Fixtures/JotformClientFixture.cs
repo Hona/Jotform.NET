@@ -6,8 +6,9 @@ public static class JotformClientFixture
 {
     private static readonly string ApiKey;
     public static readonly string UserName;
-
-    public static JotformClient JotformClient => new(ApiKey);
+    
+    public static JotformClient JotformClient => new(
+        HttpClientFixture.ResetBaseAddress(), ApiKey);
 
     public static readonly string FormId;
     public static readonly string QuestionId;

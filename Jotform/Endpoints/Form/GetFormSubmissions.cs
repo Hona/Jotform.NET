@@ -2,7 +2,7 @@
 
 public partial class JotformClient
 {
-    public async Task<PagedJotformResult<FormSubmission>?> GetFormSubmissionsAsync(string formId, int? offset = null, int? limit = null, string? filter = null, string? orderBy = null, CancellationToken cancellationToken = default)
+    public Task<PagedJotformResult<FormSubmission>?> GetFormSubmissionsAsync(string formId, int? offset = null, int? limit = null, string? filter = null, string? orderBy = null, CancellationToken cancellationToken = default)
     {
         var url = new UriBuilder($"form/{formId}/submissions")
             .AddQuery("offset", offset)
@@ -10,7 +10,8 @@ public partial class JotformClient
             .AddQuery("filter", filter)
             .AddQuery("orderby", orderBy);
 
-        return await _httpClient.GetFromJsonAsync<PagedJotformResult<FormSubmission>>(url.ToString(), _jsonSerializerOptions, cancellationToken);
+        return GetPagedResultAsync<FormSubmission>(url.ToString(),
+            cancellationToken);
     }
 }
 public class FormSubmission
