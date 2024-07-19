@@ -35,7 +35,7 @@ public class GetUserUsageResponse
     /// Total disk space used for uploaded files. In bytes.
     /// </summary>
     [JsonPropertyName("uploads")]
-    public int Uploads { get; set; }
+    public long Uploads { get; set; }
 
     /// <summary>
     /// Number of mobile submissions received this month
