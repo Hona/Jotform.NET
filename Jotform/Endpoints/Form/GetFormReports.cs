@@ -2,9 +2,9 @@
 
 public partial class JotformClient
 {
-    public async Task<JotformResult<FormReport[]>?> GetFormReportsAsync(string formId, CancellationToken cancellationToken = default) 
-        => await _httpClient.GetFromJsonAsync<JotformResult<FormReport[]>>($"form/{formId}/reports", 
-            _jsonSerializerOptions, cancellationToken);
+    public Task<JotformResult<FormReport[]>?> GetFormReportsAsync(string formId, CancellationToken cancellationToken = default) 
+        => GetResultAsync<FormReport[]>($"form/{formId}/reports",
+            cancellationToken);
 }
 
 public class FormReport

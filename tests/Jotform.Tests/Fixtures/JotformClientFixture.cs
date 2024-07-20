@@ -6,9 +6,8 @@ public static class JotformClientFixture
 {
     private static readonly string ApiKey;
     public static readonly string UserName;
-    
-    public static JotformClient JotformClient => new(
-        HttpClientFixture.ResetBaseAddress(), ApiKey);
+
+    public static JotformClient JotformClient { get; }
 
     public static readonly string FormId;
     public static readonly string QuestionId;
@@ -26,5 +25,8 @@ public static class JotformClientFixture
         QuestionId = configuration["QuestionId"] ?? throw new InvalidOperationException();
         SubmissionId = configuration["SubmissionId"] ?? throw new InvalidOperationException();
         FolderId = configuration["FolderId"] ?? throw new InvalidOperationException();
+
+        JotformClient = new(HttpClientFixture.ResetBaseAddress(),
+            ApiKey!);
     }
 }

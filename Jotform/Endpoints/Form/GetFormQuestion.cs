@@ -2,7 +2,5 @@
 
 public partial class JotformClient
 {
-    public async Task<JotformResult<Question>?> GetFormQuestionAsync(string formId, string questionId, CancellationToken cancellationToken = default) 
-        => await _httpClient.GetFromJsonAsync<JotformResult<Question>>($"form/{formId}/question/{questionId}", 
-            _jsonSerializerOptions, cancellationToken);
+    public Task<JotformResult<Question>?> GetFormQuestionAsync(string formId, string questionId, CancellationToken cancellationToken = default) => GetResultAsync<Question>($"form/{formId}/question/{questionId}", cancellationToken);
 }

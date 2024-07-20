@@ -3,8 +3,9 @@
 public partial class JotformClient
 {
     // TODO: Returns pagination info, but does not take them as parameters
-    public async Task<JotformResult<GetUserReportsResponse[]>?> GetUserReportsAsync(CancellationToken cancellationToken = default)
-        => await _httpClient.GetFromJsonAsync<JotformResult<GetUserReportsResponse[]>>("user/reports", _jsonSerializerOptions, cancellationToken);
+    public Task<JotformResult<GetUserReportsResponse[]>?> GetUserReportsAsync(CancellationToken cancellationToken = default)
+        => GetResultAsync<GetUserReportsResponse[]>("user/reports",
+            cancellationToken);
 }
 
 public class GetUserReportsResponse

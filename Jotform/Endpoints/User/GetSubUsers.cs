@@ -2,8 +2,9 @@
 
 public partial class JotformClient
 {
-    public async Task<JotformResult<GetSubUsersResponse[]>?> GetSubUsersAsync(CancellationToken cancellationToken = default)
-        => await _httpClient.GetFromJsonAsync<JotformResult<GetSubUsersResponse[]>>("user/subusers", _jsonSerializerOptions, cancellationToken: cancellationToken);
+    public Task<JotformResult<GetSubUsersResponse[]>?> GetSubUsersAsync(CancellationToken cancellationToken = default)
+        => GetResultAsync<GetSubUsersResponse[]>("user/subusers",
+            cancellationToken);
 }
 
 public enum PermissionType

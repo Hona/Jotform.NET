@@ -6,9 +6,9 @@ public partial class JotformClient
     /// Get Monthly User Usage
     /// Get number of form submissions received this month. Also, get number of SSL form submissions, payment form submissions and upload space used by user.
     /// </summary>
-    public async Task<JotformResult<GetUserUsageResponse>?> GetUserUsageAsync(CancellationToken cancellationToken = default)
-        => await _httpClient.GetFromJsonAsync<JotformResult<GetUserUsageResponse>>("user/usage", 
-            _jsonSerializerOptions, cancellationToken: cancellationToken);
+    public Task<JotformResult<GetUserUsageResponse>?> GetUserUsageAsync(CancellationToken cancellationToken = default)
+        => GetResultAsync<GetUserUsageResponse>("user/usage",
+            cancellationToken);
 }
 
 public class GetUserUsageResponse
@@ -35,7 +35,7 @@ public class GetUserUsageResponse
     /// Total disk space used for uploaded files. In bytes.
     /// </summary>
     [JsonPropertyName("uploads")]
-    public int Uploads { get; set; }
+    public long Uploads { get; set; }
 
     /// <summary>
     /// Number of mobile submissions received this month

@@ -2,9 +2,9 @@
 
 public partial class JotformClient
 {
-    public async Task<JotformResult<FormProperties>?> GetFormPropertiesAsync(string formId, CancellationToken cancellationToken = default) 
-        => await _httpClient.GetFromJsonAsync<JotformResult<FormProperties>>($"form/{formId}/properties", 
-            _jsonSerializerOptions, cancellationToken);
+    public Task<JotformResult<FormProperties>?> GetFormPropertiesAsync(string formId, CancellationToken cancellationToken = default) 
+        => GetResultAsync<FormProperties>($"form/{formId}/properties",
+            cancellationToken);
 }
 
 public class Coupon

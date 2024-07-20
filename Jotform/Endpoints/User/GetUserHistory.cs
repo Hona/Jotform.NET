@@ -2,7 +2,7 @@
 
 public partial class JotformClient
 {
-    public async Task<JotformResult<HistoryLog[]>?> GetUserHistoryAsync(HistoryAction? action = null, HistoryDate? date = null, string? startDate = null, string? endDate = null,
+    public Task<JotformResult<HistoryLog[]>?> GetUserHistoryAsync(HistoryAction? action = null, HistoryDate? date = null, string? startDate = null, string? endDate = null,
         CancellationToken cancellationToken = default)
     {
         var url = new UriBuilder("user/history")
@@ -12,7 +12,7 @@ public partial class JotformClient
             .AddQuery("endDate", endDate)
             .ToString();
 
-        return await _httpClient.GetFromJsonAsync<JotformResult<HistoryLog[]>>(url, _jsonSerializerOptions, cancellationToken);
+        return GetResultAsync<HistoryLog[]>(url, cancellationToken);
     }
 }
 
