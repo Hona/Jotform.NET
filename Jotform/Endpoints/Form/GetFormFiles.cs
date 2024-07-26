@@ -2,6 +2,10 @@
 
 public partial class JotformClient
 {
+    /// <summary>
+    /// Get a list of files uploaded on a form. Size and file type is also included.
+    /// </summary>
+    /// <param name="formId">Form ID.</param>
     public Task<JotformResult<FormFile[]>?> GetFormFilesAsync(string formId, CancellationToken cancellationToken = default) 
         => GetResultAsync<FormFile[]>($"form/{formId}/files",
             cancellationToken);

@@ -2,6 +2,12 @@
 
 public partial class JotformClient
 {
+    // TODO: properties parameter should be documented properly or better to make it strongly type.
+    /// <summary>
+    /// Add or edit properties (https://api.jotform.com/docs/properties/index.php?field=form) of a specific form
+    /// </summary>
+    /// <param name="formId">Form ID.</param>
+    /// <param name="properties"></param>
     public async Task<JotformResult<FormProperties>?> PostFormPropertiesAsync(string formId, Dictionary<string, string> properties, CancellationToken cancellationToken = default)
     {
         var formData = new FormDataBuilder();

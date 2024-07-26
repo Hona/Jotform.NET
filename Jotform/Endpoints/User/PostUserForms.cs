@@ -2,6 +2,12 @@
 
 public partial class JotformClient
 {
+    // TODO: formDefinition parameter should be documented properly or better to make it strongly type.
+    /// <summary>
+    /// Create a new form.
+    /// Create new forms with questions, properties and email settings.
+    /// </summary>
+    /// <param name="formDefinition"></param>
     public async Task<JotformResult<Models.Shared.Form>?> PostUserFormsAsync(Dictionary<string, string> formDefinition, CancellationToken cancellationToken = default)
     {
         var formData = new FormDataBuilder();

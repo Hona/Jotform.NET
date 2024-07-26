@@ -2,6 +2,10 @@
 
 public partial class JotformClient
 {
+    /// <summary>
+    /// Get User Folders.
+    /// Get a list of form folders for this account.Returns name of the folder and owner of the folder for shared folders.
+    /// </summary>
     public Task<JotformResult<GetUserFoldersResponse>?> GetUserFoldersAsync(CancellationToken cancellationToken = default)
         => GetResultAsync<GetUserFoldersResponse>("user/folders",
             cancellationToken);

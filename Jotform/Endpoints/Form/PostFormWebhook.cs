@@ -4,6 +4,12 @@ namespace Jotform;
 
 public partial class JotformClient
 {
+    /// <summary>
+    /// Add a new webhook.
+    /// </summary>
+    /// <param name="formId">Form ID.</param>
+    /// <param name="webhookUrl">Webhook URL is where form data will be posted when form is submitted. Example: http://my.web.tld/handle.php</param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
     public async Task<JotformResult<Dictionary<string, string>>?> PostFormWebhookAsync(string formId, Uri webhookUrl, CancellationToken cancellationToken = default)
     {
         if (!webhookUrl.IsAbsoluteUri)

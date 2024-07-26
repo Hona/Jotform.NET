@@ -2,6 +2,10 @@
 
 public partial class JotformClient
 {
+    /// <summary>
+    /// Get Sub-User Account List.
+    /// Get a list of sub users for this accounts and list of forms and form folders with access privileges.
+    /// </summary>
     public Task<JotformResult<GetSubUsersResponse[]>?> GetSubUsersAsync(CancellationToken cancellationToken = default)
         => GetResultAsync<GetSubUsersResponse[]>("user/subusers",
             cancellationToken);

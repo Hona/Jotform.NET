@@ -2,6 +2,9 @@
 
 public partial class JotformClient
 {
+    /// <summary>
+    /// Get limit and prices of a plan.
+    /// </summary>
     public Task<JotformResult<SystemPlan>?> GetSystemPlanAsync(SystemPlanType plan, CancellationToken cancellationToken = default)
         => GetResultAsync<SystemPlan>($"system/plan/{plan.ToString()
             .ToUpper()}", cancellationToken);

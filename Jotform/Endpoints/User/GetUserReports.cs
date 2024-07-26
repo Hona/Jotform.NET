@@ -2,7 +2,10 @@
 
 public partial class JotformClient
 {
-    // TODO: Returns pagination info, but does not take them as parameters
+    /// <summary>
+    /// Get User Reports.
+    /// List of URLS for reports in this account.Includes reports for all of the forms.ie.Excel, CSV, printable charts, embeddable HTML tables.
+    /// </summary>
     public Task<JotformResult<GetUserReportsResponse[]>?> GetUserReportsAsync(CancellationToken cancellationToken = default)
         => GetResultAsync<GetUserReportsResponse[]>("user/reports",
             cancellationToken);

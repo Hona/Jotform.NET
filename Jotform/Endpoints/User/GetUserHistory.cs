@@ -2,6 +2,14 @@
 
 public partial class JotformClient
 {
+    /// <summary>
+    /// Get History.
+    /// User activity log about things like forms created/modified/deleted, account logins and other operations.
+    /// </summary>
+    /// <param name="action">Filter results by activity performed. Default is 'all'.</param>
+    /// <param name="date">Limit results by a date range. If you'd like to limit results by specific dates you can use startDate and endDate fields instead. Example: lastWeek</param>
+    /// <param name="startDate">Limit results to only after a specific date. Format: MM/DD/YYYY. Example: 01/31/2013</param>
+    /// <param name="endDate">Limit results to only before a specific date. Format: MM/DD/YYYY. Example: 12/31/2013</param>
     public Task<JotformResult<HistoryLog[]>?> GetUserHistoryAsync(HistoryAction? action = null, HistoryDate? date = null, string? startDate = null, string? endDate = null,
         CancellationToken cancellationToken = default)
     {

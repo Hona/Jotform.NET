@@ -2,6 +2,10 @@
 
 public partial class JotformClient
 {
+    /// <summary>
+    /// Get a list of all properties (https://api.jotform.com/docs/properties/index.php) on a form.
+    /// </summary>
+    /// <param name="formId">Form ID.</param>
     public Task<JotformResult<FormProperties>?> GetFormPropertiesAsync(string formId, CancellationToken cancellationToken = default) 
         => GetResultAsync<FormProperties>($"form/{formId}/properties",
             cancellationToken);

@@ -2,6 +2,10 @@
 
 public partial class JotformClient
 {
+    /// <summary>
+    /// Get all the reports of a specific form.
+    /// </summary>
+    /// <param name="formId">Form ID.</param>
     public Task<JotformResult<FormReport[]>?> GetFormReportsAsync(string formId, CancellationToken cancellationToken = default) 
         => GetResultAsync<FormReport[]>($"form/{formId}/reports",
             cancellationToken);
