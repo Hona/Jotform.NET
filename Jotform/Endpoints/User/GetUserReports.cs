@@ -8,6 +8,7 @@ public partial class JotformClient
             cancellationToken);
 }
 
+#nullable disable
 public class GetUserReportsResponse
 {
     /// <summary>

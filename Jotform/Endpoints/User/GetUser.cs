@@ -1,5 +1,4 @@
-﻿
-namespace Jotform;
+﻿namespace Jotform;
 
 public partial class JotformClient
 {
@@ -12,6 +11,7 @@ public partial class JotformClient
         => GetResultAsync<GetUserResponse>("user", cancellationToken);
 }
 
+#nullable disable
 public class GetUserResponse
 {
     [JsonPropertyName("username")]

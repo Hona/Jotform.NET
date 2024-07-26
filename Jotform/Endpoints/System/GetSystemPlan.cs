@@ -16,6 +16,7 @@ public enum SystemPlanType
     Platinum
 }
 
+#nullable disable
 public class AnnualPlans
     {
         [JsonPropertyName("monthly")]

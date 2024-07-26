@@ -7,6 +7,7 @@ public partial class JotformClient
             cancellationToken);
 }
 
+#nullable disable
 public class FormFile
 {
     [JsonPropertyName("name")]

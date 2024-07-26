@@ -19,6 +19,7 @@ public partial class JotformClient
     }
 }
 
+#nullable disable
 public class Answer
 {
     /// <summary>
@@ -41,7 +42,7 @@ public class Answer
     public object Response { get; set; }
     
     [JsonPropertyName("prettyFormat")]
-    public string? PrettyFormat { get; set; }
+    public string PrettyFormat { get; set; }
 }
 
 public class GetUserSubmissionsResponse

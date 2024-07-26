@@ -14,6 +14,8 @@ public partial class JotformClient
             cancellationToken);
     }
 }
+
+#nullable disable
 public class FormSubmission
     {
         [JsonPropertyName("id")]

@@ -1,5 +1,5 @@
-﻿using System.Net;
-using System.Text.Json.Serialization;
+﻿#nullable disable
+using System.Net;
 
 namespace Jotform.Models.Shared;
 
@@ -7,10 +7,10 @@ public class JotformResult<TResponse>
 {
     [JsonPropertyName("responseCode")]
     public HttpStatusCode ResponseCode { get; set; }
-    
+
     [JsonPropertyName("message")]
-    public string? Message { get; set; }
-    
+    public string Message { get; set; }
+
     /// <summary>
     /// limit-left is the number of daily api calls you can make.
     /// </summary>

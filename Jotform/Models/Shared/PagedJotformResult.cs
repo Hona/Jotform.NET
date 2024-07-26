@@ -1,4 +1,5 @@
-﻿namespace Jotform.Models.Shared;
+﻿#nullable disable
+namespace Jotform.Models.Shared;
 
 public class PagedJotformResult<TResponse> : JotformResult<IReadOnlyList<TResponse>>
 {

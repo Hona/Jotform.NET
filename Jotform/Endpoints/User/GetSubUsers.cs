@@ -14,6 +14,7 @@ public enum PermissionType
     All
 }
 
+#nullable disable
 public class Permission
 {
     /// <summary>

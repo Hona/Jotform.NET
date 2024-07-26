@@ -56,6 +56,7 @@ public enum SortBy
     Descending
 }
 
+#nullable disable
 public class HistoryLog
 {
     [JsonPropertyName("type")]
