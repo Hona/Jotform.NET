@@ -4,10 +4,12 @@ public partial class JotformClient
 {
     public async Task<JotformResult<string>?> DeleteFormQuestionAsync(string formId, string questionId, CancellationToken cancellationToken = default)
     {
-        var response = await _httpClient.DeleteAsync($"form/{formId}/question/{questionId}", cancellationToken);
+        var response = await _httpClient.DeleteAsync($"form/{formId}/question/{questionId}", cancellationToken)
+            .ConfigureAwait(false);
 
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadFromJsonAsync<JotformResult<string>>(_jsonSerializerOptions, cancellationToken);
+        return await response.Content.ReadFromJsonAsync<JotformResult<string>>(_jsonSerializerOptions, cancellationToken)
+            .ConfigureAwait(false);
     }
 }

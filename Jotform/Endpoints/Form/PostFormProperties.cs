@@ -2,7 +2,7 @@
 
 public partial class JotformClient
 {
-    public async Task<Task<JotformResult<FormProperties>?>> PostFormPropertiesAsync(string formId, Dictionary<string, string> properties, CancellationToken cancellationToken = default)
+    public async Task<JotformResult<FormProperties>?> PostFormPropertiesAsync(string formId, Dictionary<string, string> properties, CancellationToken cancellationToken = default)
     {
         var formData = new FormDataBuilder();
         
@@ -11,10 +11,12 @@ public partial class JotformClient
             formData.Add(key, value);
         }
         
-        var response = await _httpClient.PostAsync($"form/{formId}/properties", formData.Build(), cancellationToken);
+        var response = await _httpClient.PostAsync($"form/{formId}/properties", formData.Build(), cancellationToken)
+            .ConfigureAwait(false);
 
         response.EnsureSuccessStatusCode();
 
-        return response.Content.ReadFromJsonAsync<JotformResult<FormProperties>>(_jsonSerializerOptions, cancellationToken);
+        return await response.Content.ReadFromJsonAsync<JotformResult<FormProperties>>(_jsonSerializerOptions, cancellationToken)
+            .ConfigureAwait(false);
     }
 }

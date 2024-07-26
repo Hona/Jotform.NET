@@ -17,10 +17,12 @@ public partial class JotformClient
             .Build();
 
         var response = await _httpClient.PostAsync("user/settings", 
-            formData, cancellationToken: cancellationToken);
+            formData, cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         response.EnsureSuccessStatusCode();
         
-        return await response.Content.ReadFromJsonAsync<JotformResult<UserSettings>>(_jsonSerializerOptions, cancellationToken);
+        return await response.Content.ReadFromJsonAsync<JotformResult<UserSettings>>(_jsonSerializerOptions, cancellationToken)
+            .ConfigureAwait(false);
     }
 }

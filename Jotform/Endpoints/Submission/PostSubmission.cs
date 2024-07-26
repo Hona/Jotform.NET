@@ -11,10 +11,11 @@ public partial class JotformClient
             formData.Add(key, value);
         }
         
-        var response = await _httpClient.PostAsync($"submission/{submissionId}", formData.Build(), cancellationToken);
+        var response = await _httpClient.PostAsync($"submission/{submissionId}", formData.Build(), cancellationToken)
+            .ConfigureAwait(false);
 
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadFromJsonAsync<JotformResult<PostFormSubmissionsResponse>>(_jsonSerializerOptions, cancellationToken: cancellationToken);
+        return await response.Content.ReadFromJsonAsync<JotformResult<PostFormSubmissionsResponse>>(_jsonSerializerOptions, cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 }

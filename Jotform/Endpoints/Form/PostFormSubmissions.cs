@@ -11,14 +11,17 @@ public partial class JotformClient
             formData.Add(key, value);
         }
         
-        var response = await _httpClient.PostAsync($"form/{formId}/submissions", formData.Build(), cancellationToken);
+        var response = await _httpClient.PostAsync($"form/{formId}/submissions", formData.Build(), cancellationToken)
+            .ConfigureAwait(false);
 
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadFromJsonAsync<JotformResult<PostFormSubmissionsResponse>>(_jsonSerializerOptions, cancellationToken);
+        return await response.Content.ReadFromJsonAsync<JotformResult<PostFormSubmissionsResponse>>(_jsonSerializerOptions, cancellationToken)
+            .ConfigureAwait(false);
     }
 }
 
+#nullable disable
 public class PostFormSubmissionsResponse
 {
     [JsonPropertyName("submissionID")]

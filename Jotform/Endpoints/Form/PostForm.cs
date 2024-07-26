@@ -17,7 +17,8 @@ public partial class JotformClient
         }
         
         var response = await _httpClient.PostAsync("form", 
-            formData.Build(), cancellationToken: cancellationToken);
+            formData.Build(), cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         response.EnsureSuccessStatusCode();
     }

@@ -15,13 +15,14 @@ public partial class JotformClient
         
         formData.Add("webhookURL", webhookUrl.ToString());
 
-        var response = await _httpClient.PostAsync($"form/{formId}/webhooks", formData.Build(), cancellationToken);
+        var response = await _httpClient.PostAsync($"form/{formId}/webhooks", formData.Build(), cancellationToken)
+            .ConfigureAwait(false);
         
         response.EnsureSuccessStatusCode();
 
         try
         {
-            return await response.Content.ReadFromJsonAsync<JotformResult<Dictionary<string, string>>>(_jsonSerializerOptions, cancellationToken);
+            return await response.Content.ReadFromJsonAsync<JotformResult<Dictionary<string, string>>>(_jsonSerializerOptions, cancellationToken).ConfigureAwait(false);
         }
         catch (JsonException)
         {

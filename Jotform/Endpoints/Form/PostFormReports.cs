@@ -14,11 +14,13 @@ public partial class JotformClient
             formData.Add("fields", string.Join(",", fields));
         }
         
-        var response = await _httpClient.PostAsync($"form/{formId}/reports", formData.Build(), cancellationToken);
+        var response = await _httpClient.PostAsync($"form/{formId}/reports", formData.Build(), cancellationToken)
+            .ConfigureAwait(false);
         
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadFromJsonAsync<JotformResult<FormReport>>(_jsonSerializerOptions, cancellationToken);
+        return await response.Content.ReadFromJsonAsync<JotformResult<FormReport>>(_jsonSerializerOptions, cancellationToken)
+            .ConfigureAwait(false);
     }
 }
 

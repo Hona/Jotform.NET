@@ -12,10 +12,12 @@ public partial class JotformClient
         }
 
         var response = await _httpClient.PostAsJsonAsync($"form/{formId}/questions", formData, _jsonSerializerOptions, 
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadFromJsonAsync<JotformResult<Question>>(_jsonSerializerOptions, cancellationToken);
+        return await response.Content.ReadFromJsonAsync<JotformResult<Question>>(_jsonSerializerOptions, cancellationToken)
+            .ConfigureAwait(false);
     }
 }
