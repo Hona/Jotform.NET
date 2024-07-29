@@ -10,5 +10,6 @@ public enum Status
     Pending,
     Enabled,
     Disabled,
-    RanToCompletion
+    RanToCompletion,
+    Archived
 }
