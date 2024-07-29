@@ -39,19 +39,18 @@ public partial class JotformClient
         _httpClient = httpClient;
     }
 
-    public Task<JotformResult<TResult>?> GetResultAsync<TResult>(
+    private Task<JotformResult<TResult>?> GetResultAsync<TResult>(
         string url, CancellationToken cancellation = default)
     {
         return _httpClient.GetFromJsonAsync<JotformResult<TResult>>(
             url, _jsonSerializerOptions, cancellation);
     }
 
-    public Task<PagedJotformResult<TResult>?>
+    private Task<PagedJotformResult<TResult>?>
         GetPagedResultAsync<TResult>(string url,
         CancellationToken cancellation = default)
     {
         return _httpClient.GetFromJsonAsync<PagedJotformResult<
             TResult>>(url, _jsonSerializerOptions, cancellation);
     }
-
 }
