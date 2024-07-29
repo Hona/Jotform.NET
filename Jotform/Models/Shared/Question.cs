@@ -72,21 +72,20 @@ public class Question
     public int? Rows { get; set; }
 }
 
-#nullable disable
 public class Sublabels
 {
     [JsonPropertyName("prefix")]
-    public string Prefix { get; set; }
+    public string? Prefix { get; set; }
 
     [JsonPropertyName("first")]
-    public string First { get; set; }
+    public string? First { get; set; }
 
     [JsonPropertyName("middle")]
-    public string Middle { get; set; }
+    public string? Middle { get; set; }
 
     [JsonPropertyName("last")]
-    public string Last { get; set; }
+    public string? Last { get; set; }
 
     [JsonPropertyName("suffix")]
-    public string Suffix { get; set; }
+    public string? Suffix { get; set; }
 }

@@ -11,44 +11,43 @@ public partial class JotformClient
             cancellationToken);
 }
 
-#nullable disable
 public class GetUserReportsResponse
 {
     /// <summary>
     /// id is report ID.
     /// </summary>
     [JsonPropertyName("id")]
-    public string Id { get; set; }
+    public string Id { get; set; } = null!;
 
     [JsonPropertyName("form_id")]
-    public string FormId { get; set; }
+    public string FormId { get; set; } = null!;
 
     [JsonPropertyName("title")]
-    public string Title { get; set; }
+    public string Title { get; set; } = null!;
 
     /// <summary>
     /// created_at, updated_at: YYYY-MM-DD HH:MM:SS
     /// </summary>
     [JsonPropertyName("created_at")]
-    public string CreatedAt { get; set; }
+    public string CreatedAt { get; set; } = null!;
 
     /// <summary>
     /// created_at, updated_at: YYYY-MM-DD HH:MM:SS
     /// </summary>
     [JsonPropertyName("updated_at")]
-    public string UpdatedAt { get; set; }
+    public string UpdatedAt { get; set; } = null!;
 
     /// <summary>
     /// fields is a comma separated list of all fields.
     /// </summary>
     [JsonPropertyName("fields")]
-    public string Fields { get; set; }
+    public string Fields { get; set; } = null!;
 
     /// <summary>
     /// list_type can be excel, csv, grid, table, calendar, rss or visual.
     /// </summary>
     [JsonPropertyName("list_type")]
-    public string ListType { get; set; }
+    public string ListType { get; set; } = null!;
 
     /// <summary>
     /// status can be ENABLED or DELETED
@@ -57,7 +56,7 @@ public class GetUserReportsResponse
     public Status Status { get; set; }
 
     [JsonPropertyName("url")]
-    public string Url { get; set; }
+    public string Url { get; set; } = null!;
 
     /// <summary>
     /// isProtected is true if password protected

@@ -64,26 +64,25 @@ public enum SortBy
     Descending
 }
 
-#nullable disable
 public class HistoryLog
 {
     [JsonPropertyName("type")]
-    public string Type { get; set; }
+    public string Type { get; set; } = null!;
 
     [JsonPropertyName("formID")]
-    public string FormID { get; set; }
+    public string FormID { get; set; } = null!;
 
     [JsonPropertyName("username")]
-    public string Username { get; set; }
+    public string Username { get; set; } = null!;
 
     [JsonPropertyName("formTitle")]
-    public string FormTitle { get; set; }
+    public string FormTitle { get; set; } = null!;
 
     [JsonPropertyName("formStatus")]
-    public string FormStatus { get; set; }
+    public string FormStatus { get; set; } = null!;
 
     [JsonPropertyName("ip")]
-    public string Ip { get; set; }
+    public string Ip { get; set; } = null!;
 
     /// <summary>
     /// timestamp is number of seconds since Jan 1st, 1970.
@@ -91,4 +90,3 @@ public class HistoryLog
     [JsonPropertyName("timestamp")]
     public int Timestamp { get; set; }
 }
-

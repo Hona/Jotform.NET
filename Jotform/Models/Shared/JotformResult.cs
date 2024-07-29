@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System.Net;
+﻿using System.Net;
 
 namespace Jotform.Models.Shared;
 
@@ -9,16 +8,17 @@ public class JotformResult<TResponse>
     public HttpStatusCode ResponseCode { get; set; }
 
     [JsonPropertyName("message")]
-    public string Message { get; set; }
+    public string Message { get; set; } = null!;
 
     /// <summary>
     /// limit-left is the number of daily api calls you can make.
     /// </summary>
-    [JsonPropertyName("limit-left")] public int RemainingApiQuota { get; set; }
+    [JsonPropertyName("limit-left")] 
+    public int RemainingApiQuota { get; set; }
 
     [JsonPropertyName("content")]
-    public TResponse Response { get; set; }
+    public TResponse? Response { get; set; }
 
     [JsonPropertyName("duration")]
-    public string Duration { get; set; }
+    public string Duration { get; set; } = null!;
 }

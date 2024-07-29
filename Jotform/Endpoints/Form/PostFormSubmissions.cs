@@ -27,12 +27,11 @@ public partial class JotformClient
     }
 }
 
-#nullable disable
 public class PostFormSubmissionsResponse
 {
     [JsonPropertyName("submissionID")]
-    public string SubmissionID { get; set; }
+    public string SubmissionID { get; set; } = null!;
 
     [JsonPropertyName("URL")]
-    public string URL { get; set; }
+    public string URL { get; set; } = null!;
 }

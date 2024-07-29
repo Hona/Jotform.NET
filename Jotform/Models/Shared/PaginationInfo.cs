@@ -1,5 +1,4 @@
-﻿#nullable disable
-namespace Jotform.Models.Shared;
+﻿namespace Jotform.Models.Shared;
 
 public class PaginationInfo
 {
@@ -8,9 +7,9 @@ public class PaginationInfo
     [JsonPropertyName("limit")]
     public int Limit { get; set; }
     [JsonPropertyName("orderby")]
-    public string OrderBy { get; set; }
+    public string OrderBy { get; set; } = null!;
     [JsonPropertyName("filter")]
-    public object Filter { get; set; }
+    public object? Filter { get; set; }
     [JsonPropertyName("count")]
     public int Count { get; set; }
 }

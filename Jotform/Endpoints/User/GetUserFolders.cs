@@ -11,17 +11,16 @@ public partial class JotformClient
             cancellationToken);
 }
 
-#nullable disable
 public class Form
     {
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
 
         [JsonPropertyName("username")]
-        public string Username { get; set; }
+        public string Username { get; set; } = null!;
 
         [JsonPropertyName("title")]
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
         [JsonPropertyName("height")]
         public int Height { get; set; }
@@ -30,10 +29,10 @@ public class Form
         public Status Status { get; set; }
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; set; }
+        public string CreatedAt { get; set; } = null!;
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; set; }
+        public string UpdatedAt { get; set; } = null!;
 
         [JsonPropertyName("new")]
         public bool New { get; set; }
@@ -42,13 +41,13 @@ public class Form
         public int Count { get; set; }
 
         [JsonPropertyName("source")]
-        public string Source { get; set; }
+        public string Source { get; set; } = null!;
 
         [JsonPropertyName("slug")]
-        public string Slug { get; set; }
+        public string Slug { get; set; } = null!;
 
         [JsonPropertyName("url")]
-        public string Url { get; set; }
+        public string Url { get; set; } = null!;
     }
 
     public class GetUserFoldersResponse
@@ -57,34 +56,34 @@ public class Form
         /// id is folder ID.
         /// </summary>
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
 
         /// <summary>
         /// path is list of folders above this folder separated with comma.
         /// </summary>
         [JsonPropertyName("path")]
-        public string Path { get; set; }
+        public string Path { get; set; } = null!;
 
         [JsonPropertyName("owner")]
-        public string Owner { get; set; }
+        public string Owner { get; set; } = null!;
 
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         /// <summary>
         /// parent is the next folder above. If this folder is a root folder parent returns itself.
         /// </summary>
         [JsonPropertyName("parent")]
-        public string Parent { get; set; }
+        public string Parent { get; set; } = null!;
 
         [JsonPropertyName("color")]
-        public string Color { get; set; }
+        public string Color { get; set; } = null!;
 
         /// <summary>
         /// forms lists all forms under this folder.
         /// </summary>
         [JsonPropertyName("forms")]
-        public Dictionary<string, Form> Forms { get; set; }
+        public Dictionary<string, Form>? Forms { get; set; }
 
         /// <summary>
         /// subfolders lists all folders under this folder.
@@ -96,22 +95,22 @@ public class Form
 public class Folder
     {
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string Id { get; set; } = null!;
 
         [JsonPropertyName("path")]
-        public string Path { get; set; }
+        public string Path { get; set; } = null!;
 
         [JsonPropertyName("owner")]
-        public string Owner { get; set; }
+        public string Owner { get; set; } = null!;
 
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         [JsonPropertyName("parent")]
-        public string Parent { get; set; }
+        public string Parent { get; set; } = null!;
 
         [JsonPropertyName("color")]
-        public string Color { get; set; }
+        public string Color { get; set; } = null!;
 
         [JsonPropertyName("forms")]
         public List<Form> Forms { get; } = new();
