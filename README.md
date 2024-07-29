@@ -1,6 +1,6 @@
 # Jotform.NET
 
-> .NET 7 async library for the Jotform API, using best practices and great test coverage
+> .NET 8/.NET Standard async library for the Jotform API, using best practices and great test coverage
 
 [![](https://img.shields.io/nuget/v/Jotform.NET.svg?label=nuget)](https://www.nuget.org/packages/Jotform.NET)
 [![](https://img.shields.io/nuget/dt/Jotform.NET.svg?label=downloads)](https://www.nuget.org/packages/Jotform.NET)
