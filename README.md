@@ -19,10 +19,10 @@ Install the package from NuGet
 Create a new JotformClient
 
 ```csharp
-var jotform = new JotformClient("myapikey");
+var jotform = new JotformClient(new HttpClient(), "myapikey");
 
 // For enterprise users
-var jotform = new JotformClient("myapikey", "mysubdomain");
+var jotform = new JotformClient(new HttpClient(), "myapikey", "mysubdomain");
 ```
 
 Basic usage
