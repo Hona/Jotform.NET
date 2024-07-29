@@ -5,6 +5,12 @@ namespace Jotform;
 
 public partial class JotformClient
 {
+    /// <summary>
+    /// Get a specific property of the form.
+    /// </summary>
+    /// <param name="formId">Form ID.</param>
+    /// <param name="property">Property expression.</param>
+    /// <exception cref="InvalidOperationException">Throws if the specified property expression is not annotated with <see cref="JsonPropertyNameAttribute"/>.</exception>
     public async Task<JotformResult<FormProperties>?> GetFormPropertyAsync(string formId, Expression<Func<FormProperties, object>> property, CancellationToken cancellationToken = default)
     {
         MemberInfo GetCorrectPropertyMemberInfo<T>(Expression<Func<T, object>> expression)

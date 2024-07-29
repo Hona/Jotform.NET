@@ -25,23 +25,23 @@ public class Answer
     /// text is the question label on the form
     /// </summary>
     [JsonPropertyName("text")]
-    public string Text { get; set; }
+    public string Text { get; set; } = null!;
 
     /// <summary>
     /// type is the question type such as textbox or dropdown
     /// Most commonly used types are control_textbox, control_textarea, control_dropdown control_radio, control_checkbox, control_fileupload, control_fullname, control_email and control_datetime. Full List https://www.jotform.com/help/46-quick-overview-of-form-fields/
     /// </summary>
     [JsonPropertyName("type")]
-    public string Type { get; set; }
+    public string Type { get; set; } = null!;
 
     /// <summary>
     /// answer is the actual entry made by the submitter
     /// </summary>
     [JsonPropertyName("answer")]
-    public object Response { get; set; }
+    public object? Response { get; set; }
     
     [JsonPropertyName("prettyFormat")]
-    public string? PrettyFormat { get; set; }
+    public string PrettyFormat { get; set; } = null!;
 }
 
 public class GetUserSubmissionsResponse
@@ -50,28 +50,28 @@ public class GetUserSubmissionsResponse
     /// id is the Submission ID
     /// </summary>
     [JsonPropertyName("id")]
-    public string Id { get; set; }
+    public string Id { get; set; } = null!;
 
     [JsonPropertyName("form_id")]
-    public string FormId { get; set; }
+    public string FormId { get; set; } = null!;
 
     /// <summary>
     /// ip address of the submitter
     /// </summary>
     [JsonPropertyName("ip")]
-    public string Ip { get; set; }
+    public string Ip { get; set; } = null!;
 
     /// <summary>
     /// created_at, updated_at: YYYY-MM-DD HH:MM:SS
     /// </summary>
     [JsonPropertyName("created_at")]
-    public string CreatedAt { get; set; }
+    public string CreatedAt { get; set; } = null!;
 
     /// <summary>
     /// created_at, updated_at: YYYY-MM-DD HH:MM:SS
     /// </summary>
     [JsonPropertyName("updated_at")]
-    public string UpdatedAt { get; set; }
+    public string UpdatedAt { get; set; } = null!;
 
     /// <summary>
     /// status can be ACTIVE or OVERQUOTA
@@ -86,5 +86,5 @@ public class GetUserSubmissionsResponse
     public bool New { get; set; }
 
     [JsonPropertyName("answers")]
-    public Dictionary<int, Answer> Answers { get; set; }
+    public Dictionary<int, Answer>? Answers { get; set; }
 }

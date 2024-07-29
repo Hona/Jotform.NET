@@ -2,15 +2,14 @@
 
 public class Form
 {
-
     [JsonPropertyName("id")]
-    public string Id { get; set; }
+    public string Id { get; set; } = null!;
 
     [JsonPropertyName("username")]
-    public string Username { get; set; }
+    public string Username { get; set; } = null!;
 
     [JsonPropertyName("title")]
-    public string Title { get; set; }
+    public string Title { get; set; } = null!;
 
     [JsonPropertyName("height")]
     public int Height { get; set; }
@@ -19,13 +18,13 @@ public class Form
     public Status Status { get; set; }
 
     [JsonPropertyName("created_at")]
-    public string CreatedAt { get; set; }
+    public string CreatedAt { get; set; } = null!;
 
     [JsonPropertyName("updated_at")]
-    public string UpdatedAt { get; set; }
+    public string UpdatedAt { get; set; } = null!;
 
     [JsonPropertyName("last_submission")]
-    public string LastSubmission { get; set; }
+    public string LastSubmission { get; set; } = null!;
 
     [JsonPropertyName("new")]
     public int New { get; set; }
@@ -43,7 +42,7 @@ public class Form
     public bool Archived { get; set; }
 
     [JsonPropertyName("url")]
-    public string Url { get; set; }
+    public string Url { get; set; } = null!;
     
 }
 

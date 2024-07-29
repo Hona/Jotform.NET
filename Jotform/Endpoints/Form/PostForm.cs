@@ -2,11 +2,7 @@
 
 public partial class JotformClient
 {
-    /// <summary>
-    /// Sample response seems broken from the docs page, return void for now
-    /// </summary>
-    /// <param name="formDefinition"></param>
-    /// <param name="cancellationToken"></param>
+    // TODO: Sample response seems broken from the docs page, returning void for now.
     public async Task PostFormAsync(Dictionary<string, string> formDefinition, CancellationToken cancellationToken = default)
     {
         var formData = new FormDataBuilder();
@@ -17,7 +13,8 @@ public partial class JotformClient
         }
         
         var response = await _httpClient.PostAsync("form", 
-            formData.Build(), cancellationToken: cancellationToken);
+            formData.Build(), cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
 
         response.EnsureSuccessStatusCode();
     }

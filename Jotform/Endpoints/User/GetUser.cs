@@ -1,5 +1,4 @@
-﻿
-namespace Jotform;
+﻿namespace Jotform;
 
 public partial class JotformClient
 {
@@ -15,28 +14,28 @@ public partial class JotformClient
 public class GetUserResponse
 {
     [JsonPropertyName("username")]
-    public string Username { get; set; }
+    public string Username { get; set; } = null!;
 
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     [JsonPropertyName("email")]
-    public string Email { get; set; }
+    public string Email { get; set; } = null!;
 
     [JsonPropertyName("website")]
-    public string Website { get; set; }
+    public string Website { get; set; } = null!;
 
     /// <summary>
     /// time_zone is in IANA format.
     /// </summary>
     [JsonPropertyName("time_zone")]
-    public string TimeZone { get; set; }
+    public string TimeZone { get; set; } = null!;
 
     /// <summary>
     /// account_type list can be seen in Pricing page.
     /// </summary>
     [JsonPropertyName("account_type")]
-    public string AccountType { get; set; }
+    public string AccountType { get; set; } = null!;
 
     [JsonPropertyName("status")]
     public Status Status { get; set; }
@@ -45,37 +44,37 @@ public class GetUserResponse
     /// created_at: YYYY-MM-DD HH:MM:SS
     /// </summary>
     [JsonPropertyName("created_at")]
-    public string CreatedAt { get; set; }
+    public string CreatedAt { get; set; } = null!;
 
     /// <summary>
     /// updated_at: YYYY-MM-DD HH:MM:SS
     /// </summary>
     [JsonPropertyName("updated_at")]
-    public string UpdatedAt { get; set; }
+    public string UpdatedAt { get; set; } = null!;
 
     [JsonPropertyName("is_verified")]
     public bool IsVerified { get; set; }
 
     [JsonPropertyName("usage")]
-    public string Usage { get; set; }
+    public string Usage { get; set; } = null!;
 
     [JsonPropertyName("industry")]
-    public string Industry { get; set; }
+    public string Industry { get; set; } = null!;
 
     [JsonPropertyName("securityAnswer")]
-    public string SecurityAnswer { get; set; }
+    public string SecurityAnswer { get; set; } = null!;
 
     [JsonPropertyName("company")]
-    public string Company { get; set; }
+    public string Company { get; set; } = null!;
 
     [JsonPropertyName("securityQuestion")]
-    public string SecurityQuestion { get; set; }
+    public string SecurityQuestion { get; set; } = null!;
 
     /// <summary>
     /// JSON serialized array of webhooks (string[])
     /// </summary>
     [JsonPropertyName("webhooks")]
-    public string Webhooks { get; set; }
+    public string Webhooks { get; set; } = null!;
 
     [JsonPropertyName("doNotClone")]
     public bool DoNotClone { get; set; }
@@ -84,11 +83,11 @@ public class GetUserResponse
     /// JSON serialized objection with a root node, and its tree structure
     /// </summary>
     [JsonPropertyName("folderLayout")]
-    public string FolderLayout { get; set; }
+    public string FolderLayout { get; set; } = null!;
 
     [JsonPropertyName("language")]
-    public string Language { get; set; }
+    public string Language { get; set; } = null!;
 
     [JsonPropertyName("avatarUrl")]
-    public string AvatarUrl { get; set; }
+    public string AvatarUrl { get; set; } = null!;
 }
