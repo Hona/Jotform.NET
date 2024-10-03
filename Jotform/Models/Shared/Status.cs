@@ -11,5 +11,6 @@ public enum Status
     Enabled,
     Disabled,
     RanToCompletion,
-    Archived
+    Archived,
+    Custom
 }
