@@ -4,14 +4,15 @@ namespace Jotform.Models.Shared;
 
 public class JotformFilterBuilder
 {
-    protected readonly Dictionary<string, object> _fields = new();
+    private const string DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    protected readonly Dictionary<string, object> _fields = [];
 
     public JotformFilterBuilder AddCriteria<TValue>(
         string field, TValue? value)
     {
         if (value is null) return this;
         if (value is DateTime dateTime)
-            _fields.Add(field, dateTime.ToString("yyyy-MM-dd hh:mm:ss"));
+            _fields.Add(field, dateTime.ToString(DATE_FORMAT));
         else
             _fields.Add(field, value.ToString()!);
 
@@ -57,44 +58,53 @@ public class JotformFilterBuilder
     }
 
     public JotformFilterBuilder AddGreaterThan(
-        string field, DateTime? value, bool minusOneDay = false)
+        string field, DateTime? value, bool minusOneSecond = false)
     {
+        if (value is null) return this;
         return AddCriteria(field, "gt", 
-            minusOneDay ? value?.AddDays(-1.0) : value);
+            minusOneSecond ? value?.AddSeconds(-1.0) : value);
     }
 
     public JotformFilterBuilder AddLessThan(
-        string field, DateTime? value, bool plusOneDay = false)
+        string field, DateTime? value, bool plusOneSecondOrDay = false)
     {
-        return AddCriteria(field, "lt", 
-            plusOneDay ? value?.AddDays(1.0) : value);
+        if (value is null) return this;
+        var dateTime = value.Value;
+        if (plusOneSecondOrDay)
+        {
+            dateTime = dateTime.TimeOfDay == TimeSpan.Zero
+                ? dateTime.AddDays(1)
+                : dateTime.AddSeconds(1);
+
+        }
+        return AddCriteria(field, "lt", dateTime);
     }
 
     public JotformFilterBuilder AddDateRange(
         string field, DateTime? start, DateTime? end, 
-        bool minusOneDayFromStart = true, 
-        bool plusOneDayToEnd = true)
+        bool minusOneSecondFromStart = true, 
+        bool plusOneSecondOrDayToEnd = true)
     {
-        return AddGreaterThan(field, start, minusOneDayFromStart)
-            .AddLessThan(field, end, plusOneDayToEnd);
+        return AddGreaterThan(field, start, minusOneSecondFromStart)
+            .AddLessThan(field, end, plusOneSecondOrDayToEnd);
     }
 
     public JotformFilterBuilder AddCreatedAtDateRange(
         DateTime? start, DateTime? end, 
-        bool minusOneDayFromStart = true,
-        bool plusOneDayToEnd = true)
+        bool minusOneSecondFromStart = true,
+        bool plusOneSecondOrDayToEnd = true)
     {
         return AddDateRange("created_at", start, end,
-            minusOneDayFromStart, plusOneDayToEnd);
+            minusOneSecondFromStart, plusOneSecondOrDayToEnd);
     }
 
     public JotformFilterBuilder AddUpdatedAtDateRange(
         DateTime? start, DateTime? end,
-        bool minusOneDayFromStart = true,
-        bool plusOneDayToEnd = true)
+        bool minusOneSecondFromStart = true,
+        bool plusOneSecondOrDayToEnd = true)
     {
         return AddDateRange("updated_at", start, end,
-            minusOneDayFromStart, plusOneDayToEnd);
+            minusOneSecondFromStart, plusOneSecondOrDayToEnd);
     }
 
     public string? Build()
