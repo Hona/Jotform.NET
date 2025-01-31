@@ -19,7 +19,7 @@ public class SimpleIntegrationTests
         user.Should().NotBeNull();
         user!.ResponseCode.Should().Be(HttpStatusCode.OK);
         user.Response.Should().NotBeNull();
-        user.Response.Email.Should().NotBeNullOrWhiteSpace();
+        user.Response!.Email.Should().NotBeNullOrWhiteSpace();
     }
 
     [Fact]
@@ -52,7 +52,7 @@ public class SimpleIntegrationTests
         submissions.Response.Should().NotBeNull();
         submissions.Response.Should().NotBeEmpty();
         submissions.PaginationInfo.Should().NotBeNull();
-        submissions.PaginationInfo.Count.Should().BeGreaterThan(0);
+        submissions.PaginationInfo!.Count.Should().BeGreaterThan(0);
     }
 
     [Fact]
@@ -71,7 +71,7 @@ public class SimpleIntegrationTests
         submissions.Response.Should().NotBeNull();
         submissions.Response.Should().NotBeEmpty();
         submissions.PaginationInfo.Should().NotBeNull();
-        submissions.PaginationInfo.Offset.Should().Be(offset);
+        submissions.PaginationInfo!.Offset.Should().Be(offset);
     }
 
     [Fact]
@@ -98,7 +98,7 @@ public class SimpleIntegrationTests
 
         // Assert
         folders.Should().NotBeNull();
-        folders!.Response.Forms.Should().HaveCountGreaterThan(0);
+        folders!.Response!.Forms.Should().HaveCountGreaterThan(0);
     }
 
     [Fact]
@@ -180,7 +180,7 @@ public class SimpleIntegrationTests
 
         // Assert
         result.Should().NotBeNull();
-        result!.Response.Name.Should().Be(JotformClientFixture.UserName);
+        result!.Response!.Name.Should().Be(JotformClientFixture.UserName);
     }
 
     [Fact]
@@ -228,7 +228,7 @@ public class SimpleIntegrationTests
         form.Should().NotBeNull();
         form!.ResponseCode.Should().Be(HttpStatusCode.OK);
         form.Response.Should().NotBeNull();
-        form.Response.Id.Should().Be(JotformClientFixture.FormId);
+        form.Response!.Id.Should().Be(JotformClientFixture.FormId);
     }
 
     [Fact]
@@ -261,7 +261,7 @@ public class SimpleIntegrationTests
         question.Should().NotBeNull();
         question!.ResponseCode.Should().Be(HttpStatusCode.OK);
         question.Response.Should().NotBeNull();
-        question.Response.Qid.Should().Be(JotformClientFixture.QuestionId);
+        question.Response!.Qid.Should().Be(JotformClientFixture.QuestionId);
     }
 
     [Fact]
@@ -293,7 +293,7 @@ public class SimpleIntegrationTests
         property.Should().NotBeNull();
         property!.ResponseCode.Should().Be(HttpStatusCode.OK);
         property.Response.Should().NotBeNull();
-        property.Response.FormWidth.Should().NotBe(default);
+        property.Response!.FormWidth.Should().NotBe(default);
     }
 
     [Fact]
@@ -310,7 +310,7 @@ public class SimpleIntegrationTests
         property.Should().NotBeNull();
         property!.ResponseCode.Should().Be(HttpStatusCode.OK);
         property.Response.Should().NotBeNull();
-        property.Response.Background.Should().NotBeNullOrWhiteSpace();
+        property.Response!.Background.Should().NotBeNullOrWhiteSpace();
     }
 
     [Fact]
@@ -386,7 +386,7 @@ public class SimpleIntegrationTests
         submission.Should().NotBeNull();
         submission!.ResponseCode.Should().Be(HttpStatusCode.OK);
         submission.Response.Should().NotBeNull();
-        submission.Response.Id.Should().Be(JotformClientFixture.SubmissionId);
+        submission.Response!.Id.Should().Be(JotformClientFixture.SubmissionId);
     }
 
     [Fact]
@@ -402,7 +402,7 @@ public class SimpleIntegrationTests
         folder.Should().NotBeNull();
         folder!.ResponseCode.Should().Be(HttpStatusCode.OK);
         folder.Response.Should().NotBeNull();
-        folder.Response.Id.Should().Be(JotformClientFixture.FolderId);
+        folder.Response!.Id.Should().Be(JotformClientFixture.FolderId);
     }
 
     // Member data to get all enum values of SystemPlanType
