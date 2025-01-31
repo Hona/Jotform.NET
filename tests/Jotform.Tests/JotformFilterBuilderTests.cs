@@ -2,13 +2,27 @@
 
 namespace Jotform.Tests;
 
+file static class AssertHelper
+{
+    internal static void AssertBuildReturnsNull(
+        this JotformFilterBuilder builder)
+    {
+        builder.Build().Should().BeNull();
+    }
+
+    internal static void AssertBuildReturnsJson(this JotformFilterBuilder builder, string jsonFilter)
+    {
+        builder.Build().Should().Be(jsonFilter);
+    }
+}
+
 public class JotformFilterBuilderTests
 {
     [Fact]
     public void Build_ReturnsNull_If_NoOtherMethodIsCalled()
     {
         var builder = new JotformFilterBuilder();
-        builder.Build().Should().BeNull();
+        builder.AssertBuildReturnsNull();
     }
 
     [Fact]
@@ -23,7 +37,7 @@ public class JotformFilterBuilderTests
         builder.AddCriteria("field2", field2);
         builder.AddCriteria("field3", field3);
         
-        builder.Build().Should().BeNull();
+        builder.AssertBuildReturnsNull();
     }
 
     [Fact]
@@ -35,7 +49,7 @@ public class JotformFilterBuilderTests
 
         builder.AddCriteria(nameof(field), field);
 
-        builder.Build().Should().Be(jsonFilter);
+        builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
@@ -47,7 +61,7 @@ public class JotformFilterBuilderTests
 
         builder.AddCriteria(nameof(field), field);
 
-        builder.Build().Should().Be(jsonFilter);
+        builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
@@ -59,7 +73,7 @@ public class JotformFilterBuilderTests
 
         builder.AddCriteria(nameof(field), field);
 
-        builder.Build().Should().Be(jsonFilter);
+        builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
@@ -72,7 +86,7 @@ public class JotformFilterBuilderTests
 
         builder.AddCriteria(nameof(field), comparision, field);
 
-        builder.Build().Should().Be(jsonFilter);
+        builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
@@ -84,7 +98,7 @@ public class JotformFilterBuilderTests
 
         builder.AddGreaterThan(nameof(field), field);
 
-        builder.Build().Should().Be(jsonFilter);
+        builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
@@ -96,7 +110,7 @@ public class JotformFilterBuilderTests
 
         builder.AddLessThan(nameof(field), field);
 
-        builder.Build().Should().Be(jsonFilter);
+        builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
@@ -108,7 +122,7 @@ public class JotformFilterBuilderTests
 
         builder.AddNotEqualTo(nameof(field), field);
 
-        builder.Build().Should().Be(jsonFilter);
+        builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
@@ -120,7 +134,7 @@ public class JotformFilterBuilderTests
 
         builder.AddMatches(nameof(field), field);
 
-        builder.Build().Should().Be(jsonFilter);
+        builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
@@ -132,7 +146,7 @@ public class JotformFilterBuilderTests
         
         builder.AddGreaterThan(nameof(field), field);
 
-        builder.Build().Should().Be(jsonFilter);
+        builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
@@ -144,7 +158,7 @@ public class JotformFilterBuilderTests
 
         builder.AddGreaterThan(nameof(field), field, true);
 
-        builder.Build().Should().Be(jsonFilter);
+        builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
@@ -156,7 +170,7 @@ public class JotformFilterBuilderTests
 
         builder.AddLessThan(nameof(field), field);
 
-        builder.Build().Should().Be(jsonFilter);
+        builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
@@ -168,6 +182,6 @@ public class JotformFilterBuilderTests
 
         builder.AddLessThan(nameof(field), field, true);
 
-        builder.Build().Should().Be(jsonFilter);
+        builder.AssertBuildReturnsJson(jsonFilter);
     }
 }
