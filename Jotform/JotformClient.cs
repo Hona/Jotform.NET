@@ -30,7 +30,7 @@ public partial class JotformClient
             throw new InvalidOperationException($"Cannot create the JotformClient instance, the base address of the httpclient is already set to {httpClient.BaseAddress} .");
 
         var baseUrl = enterpriseSubdomain != null
-            ? $"https://{enterpriseSubdomain}.jotform.com/api"
+            ? $"https://{enterpriseSubdomain}.jotform.com/API/"
             : "https://api.jotform.com";
 
         httpClient.BaseAddress = new Uri(baseUrl);
