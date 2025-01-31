@@ -26,7 +26,7 @@ public class UriBuilder
             : value.GetType().GetCustomAttribute<JsonPropertyNameAttribute>()?.Name 
               ?? value.ToString();
 
-        if (stringValue == string.Empty) return this;
+        if (string.IsNullOrWhiteSpace(stringValue)) return this;
         _parameters[parameter] = stringValue;
         return this;
     }
