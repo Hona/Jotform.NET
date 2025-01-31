@@ -34,6 +34,9 @@ public partial class JotformClient
             : "https://api.jotform.com";
 
         httpClient.BaseAddress = new Uri(baseUrl);
+        
+        // Note, there are two ways to authenticate. You can use query parameters or the header.
+        // It's generally recommended to use headers for auth, due to proxies etc logging urls which could contain secrets
         httpClient.DefaultRequestHeaders.Add("APIKEY", apiKey);
 
         _httpClient = httpClient;
