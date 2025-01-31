@@ -1,4 +1,6 @@
-﻿namespace Jotform.Models.Shared;
+﻿using System.Reflection;
+
+namespace Jotform.Models.Shared;
 
 public class UriBuilder
 {
@@ -13,9 +15,19 @@ public class UriBuilder
     public UriBuilder AddQuery<TValue>(string parameter, TValue? value)
     {
         if (value is null) return this;
-        var stringValue = value.ToString();
+
+            
+        // Instead of .ToString we want the JSON specified serialisation
+        // e.g. instead of 'LastWeek' we want 'lastWeek'
+        var stringValue = value is Enum enumValue 
+            ? enumValue.GetType().GetField(enumValue.ToString())?.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name 
+              ?? value.GetType().GetCustomAttribute<JsonPropertyNameAttribute>()?.Name
+              ?? value.ToString()
+            : value.GetType().GetCustomAttribute<JsonPropertyNameAttribute>()?.Name 
+              ?? value.ToString();
+
         if (stringValue == string.Empty) return this;
-        _parameters[parameter] = stringValue!;
+        _parameters[parameter] = stringValue;
         return this;
     }
 
