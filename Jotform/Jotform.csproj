@@ -9,7 +9,7 @@
     
     <PropertyGroup>
         <PackageId>Jotform.NET</PackageId>
-        <Version>1.1.1</Version>
+        <Version>1.2.0</Version>
         <Authors>Luke Parker, Bilal - Mohummed Ibrahim</Authors>
         <Company>LukeParkerDev</Company>
         <PackageProjectUrl>https://github.com/Hona/Jotform.NET</PackageProjectUrl>
