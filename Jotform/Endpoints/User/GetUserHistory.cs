@@ -10,7 +10,7 @@ public partial class JotformClient
     /// <param name="date">Limit results by a date range. If you'd like to limit results by specific dates you can use startDate and endDate fields instead. Example: lastWeek</param>
     /// <param name="startDate">Limit results to only after a specific date. Format: MM/DD/YYYY. Example: 01/31/2013</param>
     /// <param name="endDate">Limit results to only before a specific date. Format: MM/DD/YYYY. Example: 12/31/2013</param>
-    public Task<JotformResult<HistoryLog[]>?> GetUserHistoryAsync(HistoryAction? action = null, HistoryDate? date = null, string? startDate = null, string? endDate = null,
+    public Task<JotformResult<HistoryLog[]>?> GetUserHistoryAsync(HistoryAction? action = HistoryAction.All, HistoryDate? date = HistoryDate.LastWeek, string? startDate = null, string? endDate = null,
         CancellationToken cancellationToken = default)
     {
         var url = new UriBuilder("user/history")
@@ -26,6 +26,8 @@ public partial class JotformClient
 
 public enum HistoryAction
 {
+    [JsonPropertyName("all")]
+    All,
     [JsonPropertyName("userCreation")]
     UserCreation,
     [JsonPropertyName("userLogin")]
