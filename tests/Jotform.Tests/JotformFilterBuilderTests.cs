@@ -25,8 +25,8 @@ public class JotformFilterBuilderTests
     const string _lastDateOutput = "2020-12-31 00:00:00";
     const string _firstDateMinus1SecondOutput = 
         "2019-12-31 23:59:59";
-    const string _lastDatePlus1SecondOutput = 
-        "2021-01-01 00:00:01";
+    const string _lastDatePlus1DayOutput = 
+        "2021-01-01 00:00:00";
 
     private const string _fieldName = "field";
     private const string _fieldValue = "value";
@@ -187,13 +187,27 @@ public class JotformFilterBuilderTests
     }
 
     [Fact]
-    public void Build_ReturnsValidJson_If_AddLessThan_IsCalled_WithValidDateAndPlusOneSecondTrue()
+    public void Build_ReturnsValidJson_If_AddLessThan_IsCalled_WithValidDateAndPlusOneSecondOrDayTrue()
     {
         var jsonFilter = GetExpectedFilter(
-            _lastDatePlus1SecondOutput, "lt");
+            _lastDatePlus1DayOutput, "lt");
 
         var builder = new JotformFilterBuilder();
         builder.AddLessThan(_fieldName, _lastDateOf2020, true);
+
+        builder.AssertBuildReturnsJson(jsonFilter);
+    }
+
+    [Fact]
+    public void Build_ReturnsValidJson_If_AddLessThan_IsCalled_WithValidDateAndPlusOneSecondOrDayTrue_2()
+    {
+        var jsonFilter = GetExpectedFilter(
+            _lastDatePlus1DayOutput, "lt");
+        var lastDateOf2020AtLastSecond = _lastDateOf2020
+            .AddDays(1).AddSeconds(-1);
+
+        var builder = new JotformFilterBuilder();
+        builder.AddLessThan(_fieldName, lastDateOf2020AtLastSecond, true);
 
         builder.AssertBuildReturnsJson(jsonFilter);
     }
