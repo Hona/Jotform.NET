@@ -17,7 +17,28 @@ file static class AssertHelper
 }
 
 public class JotformFilterBuilderTests
-{
+{   
+    private static DateTime _firstDateOf2020 = new(2020, 1, 1);
+    private static DateTime _lastDateOf2020 = new(2020, 12, 31);
+
+    const string _firstDateOutput = "2020-01-01 00:00:00";
+    const string _lastDateOutput = "2020-12-31 00:00:00";
+    const string _firstDateMinus1SecondOutput = 
+        "2019-12-31 23:59:59";
+    const string _lastDatePlus1SecondOutput = 
+        "2021-01-01 00:00:01";
+
+    private const string _fieldName = "field";
+    private const string _fieldValue = "value";
+
+    private static string GetExpectedFilter(string fieldValue, 
+        string? comparision = null)
+    {
+        string fieldName = comparision is null 
+            ? _fieldName : $"{_fieldName}:{comparision}";
+        return $@"{{""{fieldName}"":""{fieldValue}""}}";
+    }
+
     [Fact]
     public void Build_ReturnsNull_If_NoOtherMethodIsCalled()
     {
@@ -28,26 +49,25 @@ public class JotformFilterBuilderTests
     [Fact]
     public void Build_ReturnsNull_If_OtherMethodsAreCalledWithNulls()
     {
-        var builder = new JotformFilterBuilder();
         string? field1 = null;
         int? field2 = null;
         decimal? field3 = null;
-        
-        builder.AddCriteria("field1", field1);
-        builder.AddCriteria("field2", field2);
-        builder.AddCriteria("field3", field3);
+
+        var builder = new JotformFilterBuilder();        
+        builder.AddCriteria(nameof(field1), field1);
+        builder.AddCriteria(nameof(field2), field2);
+        builder.AddCriteria(nameof(field3), field3);
         
         builder.AssertBuildReturnsNull();
     }
 
     [Fact]
-    public void Build_ReturnsValidJson_If_AddCriteria_IsCalledWithNonEmptyString()
+    public void Build_ReturnsValidJson_If_AddCriteria_IsCalledWithNonNullString()
     {
-        var builder = new JotformFilterBuilder();
-        string? field = "value";
-        var jsonFilter = @"{""field"":""value""}";
+        var jsonFilter = GetExpectedFilter(_fieldValue);
 
-        builder.AddCriteria(nameof(field), field);
+        var builder = new JotformFilterBuilder();
+        builder.AddCriteria(_fieldName, _fieldValue);
 
         builder.AssertBuildReturnsJson(jsonFilter);
     }
@@ -55,11 +75,11 @@ public class JotformFilterBuilderTests
     [Fact]
     public void Build_ReturnsValidJson_If_AddCriteria_IsCalledWithValidInteger()
     {
-        var builder = new JotformFilterBuilder();
-        int? field = 0;
-        var jsonFilter = @"{""field"":""0""}";
+        int? fieldValue = 0;
+        var jsonFilter = GetExpectedFilter("0");
 
-        builder.AddCriteria(nameof(field), field);
+        var builder = new JotformFilterBuilder();        
+        builder.AddCriteria(_fieldName, fieldValue);
 
         builder.AssertBuildReturnsJson(jsonFilter);
     }
@@ -67,72 +87,67 @@ public class JotformFilterBuilderTests
     [Fact]
     public void Build_ReturnsValidJson_If_AddCriteria_IsCalledWithValidDecimal()
     {
-        var builder = new JotformFilterBuilder();
-        decimal? field = 0.1M;
-        var jsonFilter = @"{""field"":""0.1""}";
+        decimal? fieldValue = 0.1M;
+        var jsonFilter = GetExpectedFilter("0.1");
 
-        builder.AddCriteria(nameof(field), field);
+        var builder = new JotformFilterBuilder();
+        builder.AddCriteria(_fieldName, fieldValue);
 
         builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
-    public void Build_ReturnsValidJson_If_AddCriteria_WithComparisionModifier_IsCalledWithNonEmptyString()
+    public void Build_ReturnsValidJson_If_AddCriteria_WithComparisionModifier_IsCalledWithNonNullString()
     {
-        var builder = new JotformFilterBuilder();
         const string comparision = "eq";
-        string? field = "value";
-        var jsonFilter = @"{""field:eq"":""value""}";
+        var jsonFilter = GetExpectedFilter(_fieldValue, comparision);
 
-        builder.AddCriteria(nameof(field), comparision, field);
-
-        builder.AssertBuildReturnsJson(jsonFilter);
-    }
-
-    [Fact]
-    public void Build_ReturnsValidJson_If_AddGreaterThan_IsCalledWithNonEmptyString()
-    {
-        var builder = new JotformFilterBuilder();
-        string? field = "value";
-        var jsonFilter = @"{""field:gt"":""value""}";
-
-        builder.AddGreaterThan(nameof(field), field);
+        var builder = new JotformFilterBuilder();        
+        builder.AddCriteria(_fieldName, comparision, _fieldValue);
 
         builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
-    public void Build_ReturnsValidJson_If_AddLessThan_IsCalledWithNonEmptyString()
+    public void Build_ReturnsValidJson_If_AddGreaterThan_IsCalledWithNonNullString()
     {
-        var builder = new JotformFilterBuilder();
-        string? field = "value";
-        var jsonFilter = @"{""field:lt"":""value""}";
+        var jsonFilter = GetExpectedFilter(_fieldValue, "gt");
 
-        builder.AddLessThan(nameof(field), field);
+        var builder = new JotformFilterBuilder();
+        builder.AddGreaterThan(_fieldName, _fieldValue);
 
         builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
-    public void Build_ReturnsValidJson_If_AddNotEqualTo_IsCalledWithNonEmptyString()
+    public void Build_ReturnsValidJson_If_AddLessThan_IsCalledWithNonNullString()
     {
-        var builder = new JotformFilterBuilder();
-        string? field = "value";
-        var jsonFilter = @"{""field:ne"":""value""}";
+        var jsonFilter = GetExpectedFilter(_fieldValue, "lt");
 
-        builder.AddNotEqualTo(nameof(field), field);
+        var builder = new JotformFilterBuilder();
+        builder.AddLessThan(_fieldName, _fieldValue);
 
         builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
-    public void Build_ReturnsValidJson_If_AddMatches_IsCalledWithNonEmptyString()
+    public void Build_ReturnsValidJson_If_AddNotEqualTo_IsCalledWithNonNullString()
     {
-        var builder = new JotformFilterBuilder();
-        string? field = "value";
-        var jsonFilter = @"{""field:matches"":""value""}";
+        var jsonFilter = GetExpectedFilter(_fieldValue, "ne");
 
-        builder.AddMatches(nameof(field), field);
+        var builder = new JotformFilterBuilder();       
+        builder.AddNotEqualTo(_fieldName, _fieldValue);
+
+        builder.AssertBuildReturnsJson(jsonFilter);
+    }
+
+    [Fact]
+    public void Build_ReturnsValidJson_If_AddMatches_IsCalledWithNonNullString()
+    {
+        var jsonFilter = GetExpectedFilter(_fieldValue, "matches");
+
+        var builder = new JotformFilterBuilder();
+        builder.AddMatches(_fieldName, _fieldValue);
 
         builder.AssertBuildReturnsJson(jsonFilter);
     }
@@ -140,23 +155,22 @@ public class JotformFilterBuilderTests
     [Fact]
     public void Build_ReturnsValidJson_If_AddGreaterThan_IsCalledWithValidDate()
     {
-        var builder = new JotformFilterBuilder();
-        DateTime? field = new DateTime(2024, 1, 1);
-        var jsonFilter = @$"{{""field:gt"":""2024-01-01 12:00:00""}}";
-        
-        builder.AddGreaterThan(nameof(field), field);
+        var jsonFilter = GetExpectedFilter(_firstDateOutput, "gt");
+
+        var builder = new JotformFilterBuilder();        
+        builder.AddGreaterThan(_fieldName, _firstDateOf2020);
 
         builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
-    public void Build_ReturnsValidJson_If_AddGreaterThan_IsCalledWithValidDateAndMinusOneDayTrue()
+    public void Build_ReturnsValidJson_If_AddGreaterThan_IsCalledWithValidDateAndMinusOneSecondTrue()
     {
-        var builder = new JotformFilterBuilder();
-        DateTime? field = new DateTime(2024, 1, 2);
-        var jsonFilter = @$"{{""field:gt"":""2024-01-01 12:00:00""}}";
+        var jsonFilter = GetExpectedFilter(
+            _firstDateMinus1SecondOutput, "gt");
 
-        builder.AddGreaterThan(nameof(field), field, true);
+        var builder = new JotformFilterBuilder();
+        builder.AddGreaterThan(_fieldName, _firstDateOf2020, true);
 
         builder.AssertBuildReturnsJson(jsonFilter);
     }
@@ -164,23 +178,22 @@ public class JotformFilterBuilderTests
     [Fact]
     public void Build_ReturnsValidJson_If_AddLessThan_IsCalledWithValidDate()
     {
-        var builder = new JotformFilterBuilder();
-        DateTime? field = new DateTime(2024, 1, 1);
-        var jsonFilter = @$"{{""field:lt"":""2024-01-01 12:00:00""}}";
+        var jsonFilter = GetExpectedFilter(_lastDateOutput, "lt");
 
-        builder.AddLessThan(nameof(field), field);
+        var builder = new JotformFilterBuilder();       
+        builder.AddLessThan(_fieldName, _lastDateOf2020);
 
         builder.AssertBuildReturnsJson(jsonFilter);
     }
 
     [Fact]
-    public void Build_ReturnsValidJson_If_AddLessThan_IsCalledWithValidDateAndPlusOneDayTrue()
+    public void Build_ReturnsValidJson_If_AddLessThan_IsCalled_WithValidDateAndPlusOneSecondTrue()
     {
-        var builder = new JotformFilterBuilder();
-        DateTime? field = new DateTime(2024, 1, 1);
-        var jsonFilter = @$"{{""field:lt"":""2024-01-02 12:00:00""}}";
+        var jsonFilter = GetExpectedFilter(
+            _lastDatePlus1SecondOutput, "lt");
 
-        builder.AddLessThan(nameof(field), field, true);
+        var builder = new JotformFilterBuilder();
+        builder.AddLessThan(_fieldName, _lastDateOf2020, true);
 
         builder.AssertBuildReturnsJson(jsonFilter);
     }
